@@ -13,3 +13,7 @@ class UserResponse(BaseModel):
     name: str
     last_name: str
     age: int
+
+class UserLogin(BaseModel):
+    login: str
+    password: str

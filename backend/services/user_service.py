@@ -1,8 +1,10 @@
 from pymongo.collection import Collection
 from bson import ObjectId
 from models.user_model import User
+from utils.password_security import hash_password
 
-def create_user(db:Collection,user_data:dict):
+def create_user(db:Collection, user_data:dict):
+    user_data["password"] = hash_password(user_data["password"])
     user = User(**user_data)
     result = db.insert_one(user.serialize())
     return {**user.serialize(), "id": str(result.inserted_id)}

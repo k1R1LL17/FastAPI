@@ -7,8 +7,6 @@ class User(BaseModel):
     last_name: str
     age: int
 
-    def serialize(self, exclude_password=True):
+    def serialize(self):
         data = self.model_dump()
-        if exclude_password:
-            data.pop("password", None)
         return data
