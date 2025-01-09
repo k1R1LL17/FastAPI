@@ -5,5 +5,4 @@ client = MongoClient("mongodb+srv://admin:admin@cluster0.pxcvj.mongodb.net/?retr
 db = client.game_shop
 
 def get_users_collection() -> Collection:
-    """Dependency function to return the MongoDB users collection."""
     return db["users"]
