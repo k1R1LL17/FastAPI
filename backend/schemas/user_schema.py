@@ -1,6 +1,7 @@
 from pydantic import BaseModel
+from models.user_model import User
 
-class UserCreate(BaseModel):
+class UserCreate(User):
     login: str
     password: str
     name: str
@@ -14,7 +15,7 @@ class UserResponse(BaseModel):
     last_name: str
     age: int
 
-class UserUpdate(BaseModel):
+class UserUpdate(User):
     login: str
     name: str
     last_name: str
