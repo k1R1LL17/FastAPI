@@ -19,3 +19,22 @@ def get_user_id(db:Collection, user_id:str) -> dict:
     if user:
         return {**user, "id": str(user["_id"])}
     return None
+
+def update_user(db: Collection, user_id: str, user_data: dict) -> dict:
+
+    update_fields = {key: value for key, value in user_data.items() if value is not None}
+
+    result = db.update_one(
+        {"_id": ObjectId(user_id)},  
+        {"$set": update_fields}  
+    )
+
+    if result.matched_count > 0:
+        updated_user = db.find_one({"_id": ObjectId(user_id)})
+        return {**updated_user, "id": str(updated_user["_id"])}
+    else:
+        return None
+
+def delete_user(db:Collection, user_id:str) -> bool:
+    result = db.delete_one({"_id": ObjectId(user_id)})
+    return result.deleted_count > 0

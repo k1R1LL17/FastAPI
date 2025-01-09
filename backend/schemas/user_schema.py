@@ -14,6 +14,8 @@ class UserResponse(BaseModel):
     last_name: str
     age: int
 
-class UserLogin(BaseModel):
+class UserUpdate(BaseModel):
     login: str
-    password: str
+    name: str
+    last_name: str
+    age: int
