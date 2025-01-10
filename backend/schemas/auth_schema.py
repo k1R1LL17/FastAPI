@@ -6,3 +6,7 @@ class LoginRequest(BaseModel):
 
 class LoginResponse(BaseModel):
     message: str
+
+class UserRegister(BaseModel):
+    login: str
+    password: str

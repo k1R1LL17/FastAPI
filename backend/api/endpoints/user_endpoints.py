@@ -3,11 +3,17 @@ from schemas.user_schema import UserCreate, UserResponse,UserUpdate
 from services.user_service import create_user,get_users,get_user_id,update_user,delete_user
 from config.config import get_users_collection 
 from utils.jwt_utils import get_current_user
+from utils.role_restriction import role_required
+from models.enums.role_enum import RoleEnum
 
 router = APIRouter()
 
 @router.post("/create/user", response_model=UserResponse)
-def create_user_endpoint(user: UserCreate, users_collection = Depends(get_users_collection), current_user = Depends(get_current_user)):
+def create_user_endpoint(
+    user: UserCreate, 
+    users_collection = Depends(get_users_collection), 
+    current_user = Depends(role_required(RoleEnum.ADMIN))
+):
     return create_user(users_collection, user.model_dump())
 
 @router.get("/get/users",response_model=list[UserResponse])

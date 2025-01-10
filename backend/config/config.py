@@ -6,3 +6,6 @@ db = client.game_shop
 
 def get_users_collection() -> Collection:
     return db["users"]
+
+def get_roles_collection() -> Collection:
+    return db["roles"]
