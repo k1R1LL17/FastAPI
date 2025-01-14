@@ -8,7 +8,8 @@ def test_create_user_with_admin_role(client, access_token_admin, mock_user_colle
         "name": "New",
         "last_name": "User",
         "age": 30,
-        "role_id": "6781177cf2e31cc2c6b2b7fb" 
+        "role_id": "6781177cf2e31cc2c6b2b7fb",
+        "email": "user@example.com"
     }
 
     mock_user_collection.insert_one.return_value = MagicMock(inserted_id="12345")
@@ -19,6 +20,7 @@ def test_create_user_with_admin_role(client, access_token_admin, mock_user_colle
         cookies={"access_token": access_token_admin} 
     )
 
+    
     assert response.status_code == 200
     response_data = response.json()
     assert response_data["login"] == "newuser"
@@ -76,7 +78,8 @@ def test_create_user_ivalid_login(client,access_token_admin,mock_user_collection
         "name": "New",
         "last_name": "User",
         "age": 30,
-        "role_id": "6781177cf2e31cc2c6b2b7fb" 
+        "role_id": "6781177cf2e31cc2c6b2b7fb",
+        "email": "user@example.com"
     }
 
     mock_user_collection.insert_one.return_value = MagicMock(inserted_id="12345")
