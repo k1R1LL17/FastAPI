@@ -5,6 +5,7 @@ from fastapi.security import OAuth2PasswordBearer
 from bson import ObjectId
 from config.config import get_users_collection,get_roles_collection
 from schemas.user_schema import RoleRestriction
+
 SECRET_KEY = "some_key"
 ALGORITHM = "HS256"
 ACCESS_TOKEN_EXPIRE_MINUTES = 30

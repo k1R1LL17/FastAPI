@@ -1,5 +1,7 @@
 from fastapi import HTTPException
 import re
+from config.config import get_users_collection
+from pymongo.collection import Collection
 
 def validate_age(age: int):
     if age <= 12:
@@ -13,3 +15,25 @@ def validate_password(password: str):
             detail="Password must be at least 8 characters long, contain one uppercase letter, one number, and one special character."
         )
     return password
+
+def validate_login(login: str):
+    users_collection: Collection = get_users_collection()
+
+    if users_collection.find_one({"login": login}):
+        raise HTTPException(
+            status_code=400,
+            detail="This login already exists"
+        )
+    
+    return login
+
+def validate_email(email:str):
+    users_collection: Collection = get_users_collection()
+
+    if users_collection.find_one({"email": email}):
+        raise HTTPException(
+            status_code=400,
+            detail="This email already exists"
+        )
+    
+    return email
